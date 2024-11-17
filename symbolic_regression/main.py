@@ -7,9 +7,6 @@ import numpy as np
 import os
 import csv
 
-# Definindo semente aleatória
-random.seed(42)
-
 # Conseguindo Dados
 data_train = pd.read_csv('/home/lucasjunq/Desktop/CompNat/data/breast_cancer_coimbra_train.csv')
 data_test = pd.read_csv('/home/lucasjunq/Desktop/CompNat/data/breast_cancer_coimbra_test.csv')
@@ -26,20 +23,24 @@ variables = X_train.columns
 # Definindo Parâmetros
 operators = ['+','-','*','/','and','or','xor'] # Operadores
 tam_pop = 100 # Tamanho da população inicial
-# n_ger = 30 # Números de gerações
-many_n_ger = [30, 50, 100]
-tam_max_ind = 7 # Tamanho maximo do indivíduo
-n_elite = 2 # Número de elitistas
-k_tour = 2 # Número K para o torneio
+n_ger = 50 # Números de gerações
 p_mut = 0.05 # Probabilidade de mutação
 p_cross = 0.9 # Probabilidade de CrossOvercl
+# k_tour = 2 # Número K para o torneio
+many_k_tour = [2]
+n_elite = 2 # Número de elitistas
+tam_max_ind = 7 # Tamanho maximo do indivíduo
 
 # Treino
 #symbolic_regression(tam_pop,tam_max_ind,p_mut,p_cross,n_elite,k_tour,n_ger,variables,operators,X_train,Y_train, labels)
 
 # Treino / Teste variando tamanho das gerações
-for n_ger in many_n_ger:
-    print(f"NUMERO DE GERAÇÔES: {n_ger}.\n")
+for k_tour in many_k_tour:
+
+    # Definindo semente aleatória
+    random.seed(42)
+
+    print(f"PROB DE MUT: {p_mut} | PROB DE CROSS: {p_cross}.\n")
 
     #Treino
     print("Estatisticas de Treino:\n")
@@ -67,13 +68,13 @@ for n_ger in many_n_ger:
     print(f"Pior Fitness: {test_stats[3]},")
 
     # Caminho da pasta onde o CSV será salvo
-    output_folder = 'results/var_n_ger'
+    output_folder = 'results/var_mut_cross'
 
     # Garante que a pasta existe, cria caso contrário
     os.makedirs(output_folder, exist_ok=True)
 
     # Caminho completo do arquivo com a pasta incluída
-    file_path = os.path.join(output_folder, f'test_stats_n_ger{n_ger}.csv')
+    file_path = os.path.join(output_folder, f'test_stats_mut_cross{p_mut}x{p_cross}.csv')
 
     # Salvando todas as estatísticas em um arquivo CSV ao final do loop
     stats = []
