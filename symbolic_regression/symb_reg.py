@@ -58,11 +58,6 @@ def fitness(sol, X, Y, variables, labels):
             sub = [a - b for a, b in zip(line1, line2)]
             dictionary = dict(zip(variables, sub))
             dist_matrix[i][j] = sol.evaluate(dictionary)
-            # if dist_matrix[i][j] == float('inf'):
-            #     # print(f"matriz[{i}][{j}]", "\n")
-            #     dist_matrix[i][j] = 0
-    # print("MATRIZZZZZ")
-    # print(dist_matrix)
 
     # Calculando Clusters
     clustering = AgglomerativeClustering(n_clusters=len(labels),metric='precomputed',linkage='average')
@@ -169,13 +164,13 @@ def symbolic_regression(tam_pop, tam_max_ind, p_mut, p_cross, n_elite, k_tour, n
         print(f"Indv piores que os pais: {stats_per_ger[7]}.\n")
     
     # Caminho da pasta onde o CSV será salvo
-    output_folder = 'results/var_mut_cross'
+    output_folder = 'results/var_k_tour'
 
     # Garante que a pasta existe, cria caso contrário
     os.makedirs(output_folder, exist_ok=True)
 
     # Caminho completo do arquivo com a pasta incluída
-    file_path = os.path.join(output_folder, f'stats_mut_cross{p_mut}x{p_cross}.csv')
+    file_path = os.path.join(output_folder, f'stats_k_tour{k_tour}.csv')
 
     # Salvando todas as estatísticas em um arquivo CSV ao final do loop
     with open(file_path, mode='w', newline='') as file:

@@ -24,10 +24,10 @@ variables = X_train.columns
 operators = ['+','-','*','/','and','or','xor'] # Operadores
 tam_pop = 100 # Tamanho da população inicial
 n_ger = 50 # Números de gerações
-p_mut = 0.05 # Probabilidade de mutação
-p_cross = 0.9 # Probabilidade de CrossOvercl
+p_mut = 0.6 # Probabilidade de mutação
+p_cross = 0.3 # Probabilidade de CrossOver
 # k_tour = 2 # Número K para o torneio
-many_k_tour = [2]
+many_k_tour = [2, 5, 10, 25]
 n_elite = 2 # Número de elitistas
 tam_max_ind = 7 # Tamanho maximo do indivíduo
 
@@ -40,7 +40,7 @@ for k_tour in many_k_tour:
     # Definindo semente aleatória
     random.seed(42)
 
-    print(f"PROB DE MUT: {p_mut} | PROB DE CROSS: {p_cross}.\n")
+    print(f"K DO TORNEIO: {k_tour}.\n")
 
     #Treino
     print("Estatisticas de Treino:\n")
@@ -68,13 +68,13 @@ for k_tour in many_k_tour:
     print(f"Pior Fitness: {test_stats[3]},")
 
     # Caminho da pasta onde o CSV será salvo
-    output_folder = 'results/var_mut_cross'
+    output_folder = 'results/var_k_tour'
 
     # Garante que a pasta existe, cria caso contrário
     os.makedirs(output_folder, exist_ok=True)
 
     # Caminho completo do arquivo com a pasta incluída
-    file_path = os.path.join(output_folder, f'test_stats_mut_cross{p_mut}x{p_cross}.csv')
+    file_path = os.path.join(output_folder, f'test_stats_k_tour{k_tour}.csv')
 
     # Salvando todas as estatísticas em um arquivo CSV ao final do loop
     stats = []
