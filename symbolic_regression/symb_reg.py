@@ -164,13 +164,13 @@ def symbolic_regression(tam_pop, tam_max_ind, p_mut, p_cross, n_elite, k_tour, n
         print(f"Indv piores que os pais: {stats_per_ger[7]}.\n")
     
     # Caminho da pasta onde o CSV será salvo
-    output_folder = 'results/var_k_tour'
+    output_folder = 'results/var_wineRed'
 
     # Garante que a pasta existe, cria caso contrário
     os.makedirs(output_folder, exist_ok=True)
 
     # Caminho completo do arquivo com a pasta incluída
-    file_path = os.path.join(output_folder, f'stats_k_tour{k_tour}.csv')
+    file_path = os.path.join(output_folder, f'stats_wineRed.csv')
 
     # Salvando todas as estatísticas em um arquivo CSV ao final do loop
     with open(file_path, mode='w', newline='') as file:
